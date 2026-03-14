@@ -1,0 +1,357 @@
+:root {
+    --primary-color: #2563eb;
+    --primary-light: #eff6ff;
+    --bg-main: #ffffff;
+    --bg-sub: #f8fafc;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main-layout {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* 侧边栏：极简主义 + 毛玻璃特效 */
+.sidebar {
+    width: 380px;
+    background-color: rgba(248, 250, 252, 0.7); /* 半透明背景 */
+    backdrop-filter: blur(12px); /* 毛玻璃特效 */
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(226, 232, 240, 0.5);
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px 32px 24px; /* 增加底部 padding */
+    gap: 12px;
+    z-index: 10;
+    overflow-y: auto; /* 允许纵向滚动 */
+    transition: background-color 0.3s ease;
+}
+
+/* 优化滚动条样式：增强可见性 */
+.sidebar::-webkit-scrollbar {
+    width: 6px; /* 稍微加宽 */
+}
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(226, 232, 240, 0.3); /* 轨道底色，暗示可滚动 */
+    border-radius: 10px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(37, 99, 235, 0.2); /* 使用主色调蓝色的淡化版 */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(37, 99, 235, 0.5); /* 悬浮时显著变深 */
+}
+
+.sidebar:hover {
+    background-color: rgba(248, 250, 252, 0.85);
+}
+
+.lang-switch {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.lang-btn {
+    padding: 4px 8px;
+    font-size: 0.625rem;
+    font-weight: 800;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lang-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.sidebar h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.description {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+/* 输入与控制按钮组 - 增加悬浮动画 (Lift Effect) */
+.control-group {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.control-group:hover {
+    transform: translateY(-4px); /* Lift Effect */
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    border-color: rgba(37, 99, 235, 0.2);
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+input[type="number"] {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    outline: none;
+}
+
+/* 动画速度控制 */
+.speed-control-group {
+    margin-bottom: 12px;
+    background: #f8fafc;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.speed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.speed-header label {
+    margin-bottom: 0;
+    font-size: 0.65rem;
+    font-weight: 800;
+}
+
+#speed-value {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: var(--primary-light);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    appearance: none;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* 按钮交互 */
+.control-actions { display: flex; flex-direction: column; gap: 8px; }
+.step-controls, .meta-controls { display: flex; gap: 6px; }
+.step-controls button, .meta-controls button { flex: 1; }
+
+button {
+    padding: 10px 4px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: white;
+    cursor: pointer;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+button:active:not(:disabled) { transform: scale(0.96); }
+
+.btn-primary { background-color: var(--primary-color); color: white !important; border: none; }
+.btn-secondary { background-color: #f8fafc; border-color: #cbd5e1; color: #475569; }
+.btn-danger { background-color: #fff1f2; border-color: #fecdd3; color: #e11d48; }
+
+.step-info {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+#step-counter { color: var(--primary-color); font-weight: 700; }
+
+/* 核心特性区域：紧贴控制组，极简透明 */
+.rules-guide {
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    border: 1px solid rgba(226, 232, 240, 0.4);
+    margin-top: 8px;
+}
+
+.rules-guide h3 {
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+}
+
+.rules-guide li {
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    margin-bottom: 10px;
+    display: block; /* 放弃 flex，使用块级布局 */
+    position: relative;
+}
+
+.rules-guide li::before {
+    content: "•"; /* 使用标准的项目符号字符，使其更贴合文字流 */
+    color: var(--text-muted);
+    font-weight: bold;
+    margin-right: 8px;
+    display: inline-block; /* 让圆点成为行内的一部分 */
+}
+
+.hl-red { color: #ef4444; font-weight: 700; }
+.hl-black { color: #1e293b; font-weight: 700; }
+
+/* 画布区域：中心发光背景 + 点阵网格 */
+.canvas-area {
+    flex: 1;
+    position: relative;
+    background-color: #ffffff;
+    background-image: 
+        radial-gradient(circle at center, rgba(255, 255, 255, 0) 0%, #f8fafc 100%),
+        radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+    background-size: 100% 100%, 40px 40px;
+    background-position: center;
+}
+
+#tree-canvas { width: 100%; height: 100%; display: block; }
+
+/* 空状态引导 */
+#empty-hint {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.hint-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 底部通栏日志面板：毛玻璃与深色质感 */
+.full-width-status {
+    height: 100px;
+    background-color: rgba(248, 250, 252, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border-color);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    z-index: 20;
+}
+
+.status-container { width: 100%; max-width: 1400px; margin: 0 auto; }
+
+.status-header {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-tag {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+#status-log {
+    color: var(--text-main);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: 'JetBrains Mono', 'Inter', monospace;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

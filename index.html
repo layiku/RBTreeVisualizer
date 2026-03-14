@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红黑树学习工具 - RBTree Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="js/i18n.js"></script>
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="main-layout">
+            <!-- 侧边控制栏 -->
+            <aside class="sidebar">
+                <header>
+                    <div class="lang-switch">
+                        <button id="btn-lang-zh" class="lang-btn active">ZH</button>
+                        <button id="btn-lang-en" class="lang-btn">EN</button>
+                    </div>
+                    <h1 data-i18n="title">RBTree 可视化</h1>
+                    <p class="description" data-i18n="description">算法分步演示教学工具</p>
+                </header>
+                
+                <!-- 交互区域 -->
+                <section class="control-group">
+                    <label for="node-value" data-i18n="inputLabel">插入节点</label>
+                    <div class="input-row">
+                        <input type="number" id="node-value" placeholder="1-99" min="1" max="99">
+                        <button id="btn-insert" class="btn-primary" data-i18n="insertBtn">插入</button>
+                    </div>
+
+                    <div class="control-actions">
+                        <div class="speed-control-group">
+                            <div class="speed-header">
+                                <label for="anim-speed" data-i18n="speedLabel">演示速度</label>
+                                <span id="speed-value">1.0x</span>
+                            </div>
+                            <input type="range" id="anim-speed" min="0.1" max="2.0" value="1.0" step="0.1">
+                        </div>
+                        <div class="step-controls">
+                            <button id="btn-prev" disabled data-i18n="prevBtn">上一步</button>
+                            <button id="btn-next" disabled data-i18n="nextBtn">下一步</button>
+                            <button id="btn-auto" disabled data-i18n="autoBtn">自动播放</button>
+                        </div>
+                        <div class="meta-controls">
+                            <button id="btn-finish" disabled class="btn-secondary" data-i18n="finishBtn">完成本次平衡</button>
+                            <button id="btn-reset" class="btn-danger" data-i18n="resetBtn">重置整棵树</button>
+                        </div>
+                    </div>
+
+
+                    <div class="step-info">
+                        <span data-i18n="stepInfo">当前进度</span>: <span id="step-counter">- / -</span>
+                    </div>
+                </section>
+
+                <!-- 紧跟插入区域后的核心特性 -->
+                <section class="rules-guide">
+                    <h3 data-i18n="rulesTitle">红黑树核心特性</h3>
+                    <ul>
+                        <li data-i18n="rule1">1. 根节点始终为黑色。</li>
+                        <li data-i18n="rule2">2. 红色节点不能连续 (红红冲突)。</li>
+                        <li data-i18n="rule3">3. 从任一节点到其所有叶子节点的每一条简单路径上，所包含的 <b>黑色节点数量</b> 都必须相同。</li>
+                        <li data-i18n="rule4">4. 新插入节点默认为红色。</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <!-- 画布区域 -->
+            <main class="canvas-area">
+                <div id="empty-hint">
+                    <div class="hint-icon">🌳</div>
+                    <p data-i18n="emptyHint">树中暂无节点，在左侧输入数值开始</p>
+                </div>
+                <canvas id="tree-canvas"></canvas>
+            </main>
+        </div>
+
+        <!-- 底部通栏日志 -->
+        <footer class="full-width-status">
+            <div class="status-container">
+                <div class="status-header">
+                    <span class="status-tag" data-i18n="statusTag">实时算法日志</span>
+                </div>
+                <div id="status-log" data-i18n="statusWait">等待输入插入值以开始分析...</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 脚本加载 -->
+    <script src="js/rbtree.js"></script>
+    <script src="js/visualizer.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
